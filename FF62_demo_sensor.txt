@@ -1,0 +1,1 @@
+08/19/19 10:01:14|FF62_demo_sensor.txt|||2|85|0|0|142|perf-batt-PIR-reed-light||00 02 55 8e 00 00

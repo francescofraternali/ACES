@@ -18,6 +18,8 @@ import string
 import shutil
 import smtplib
 
+ID_BLE_path = "BLE/ID_RL.txt"
+
 with open("ID_RL.txt", 'r') as f:
     content = f.read()
 
@@ -32,12 +34,13 @@ dirpath = os.getcwd()
 BS_ID = os.path.basename(dirpath)
 #print(BS_ID)
 
-with open("../BLE/ID.txt", 'r') as f:
+with open("ID_BLE.txt", 'r') as f:
     for line in f:
         splt = line.strip().split(',')
         if splt[0] == Device:
             File_name = splt[1]
 
+'''
 with open('../info_BS.txt') as f:
     for line in f:
         line = line.strip().split('=')
@@ -45,6 +48,7 @@ with open('../info_BS.txt') as f:
             pwd = line[1]
         elif line[0] == "bs_name":
             bs_name = line[1]
+'''
 
 granularity = "15min" # see option above
 granul = [900, 900, 900, 900] # as Reality
@@ -55,7 +59,7 @@ tot_episodes = 20000; tot_action = 4
 steps = (tot_episodes)/10
 steps = 1
 epsi_steps = (Epsilon_max - Epsilon_min)/7
-epsi_steps = 0.00007
+epsi_steps = 0.0007 #0.00007
 save_rate = 5000
 #epsi_steps = 0.0004
 diction = {'SC_norm':'SC_n', 'Light': 'Light', 'week': 'wk'}
@@ -170,8 +174,9 @@ def update_Real():
         skip_dead = 10
         Node_Death = False
         Sleep = granul[0]
-        sync_input_data()
-        sync_ID_file()
+        
+        #sync_input_data()
+        #sync_ID_file()
 
         s, s_, old, perf, reward = Environ.Init(feat, granul, File_name)
         while True: # this loop lasts one day
@@ -198,7 +203,7 @@ def update_Real():
             #print("ID: " +str(BS_ID) + "_" +str(Device) + ", Last_Data: " + str(toPrint) + ", Skip: " + str(Skip) + ", Next_Act: " + str(action) + ", Wait[s]: " + str(Sleep))
             print("ID: {0}_{1}, Last_Data: {2}, Skip: {3}, Next_Act: {4}, Wait[s]: {5}".format(str(BS_ID), str(Device), str(toPrint), str(Skip), str(action), str(Sleep)))
             time.sleep(900) # sleep while waiting for next data
-            sync_input_data()
+            #sync_input_data()
 
             reward, done, s_, Skip, new, Node_Death, perf = Environ.Envi(action, tot_action, feat, granul, s, old, File_name, Sleep)
 
@@ -336,7 +341,7 @@ def sync_action(action):
     for num_attemps in range(3):
         try:
             # Now Let's update the action
-            with open('../BLE/ID.txt', 'r') as f:
+            with open(ID_BLE_path, 'r') as f:
                 lines = f.read().splitlines()
                 count = 0
                 for line in lines:
@@ -383,7 +388,11 @@ def find_Q_Table(day):
     (out, err) = proc.communicate()
     out = out.decode()
     spl = out.strip().split('\n')
-
+    print(spl)
+    #if spl[0]== "":
+        #print("No Q tables found")
+    Q_found = "Q_Table_10"
+    
     try:
         for file in spl:
             #print("here")
@@ -401,7 +410,7 @@ def find_Q_Table(day):
                     #print("break")
                     break
     except:
-        print("No Q_Tables found...")
+        print("No valid Q_Tables found...")
 
     return Q_found, day
 
@@ -424,26 +433,11 @@ if __name__ == "__main__":
 
     Text_Table = "_".join(str(elem) for elem in spl)
 
-    #while True:
-    #    try:
-    #        #print("Q_Tables/Q_Table_" + Text +str(check_start_day) + ".pkl")
-    #        file = open("Q_Tables/Q_Table_" + Text +str(check_start_day) + ".pkl", 'r')
-    #        check_start_day += 10
-    #    except:
-    #        day = check_start_day - 10
-    #        break
-
-    #if day >= 10:
-    #    print("Found: " + "Q_Table_" + Text +str(day) + ".pkl")
-    #else:
-    #    day = 10
-    #    print("No Q_Tables found...")
     time.sleep(1)
 
-    print("Synching Data...")
-
-    sync_ID_file()
-    sync_input_data()
+    #print("Synching Data...")
+    #sync_ID_file()
+    #sync_input_data()
 
     #print("Testing Email...")
     #message = "Email Test"
@@ -455,7 +449,7 @@ if __name__ == "__main__":
     File_Begin_Time = datetime.datetime.now() - datetime.timedelta(0, ((day/10)*24*60*60))
     #File_Begin_Time = datetime.datetime.strptime(Start_Real_Time, '%m/%d/%y %H:%M:%S')
     #File_Begin_Time = Start_Real_Time.strftime('%m/%d/%y %H:%M:%S')
-    print("Very Beginning Experiment is: " + str(File_Begin_Time))
+    print("Beginning Experiment is: " + str(File_Begin_Time))
     time.sleep(0.5)
     print("Steps and Epsilon Steps: " + str(steps) + ", " + str(epsi_steps))
     time.sleep(0.5)
@@ -498,9 +492,10 @@ if __name__ == "__main__":
             end_sim_dt = datetime.datetime.now()
             end_sim = end_sim_dt.strftime('%m/%d/%y %H:%M:%S')
 
-            start_sim_dt = end_sim_dt - datetime.timedelta(0, ((end_day/10)*24*60*60))
-
-            start_sim_dt = end_sim_dt - datetime.timedelta(0, ((15)*24*60*60)) # So I only use the last 15 days for learning
+            #start_sim_dt = end_sim_dt - datetime.timedelta(0, ((end_day/10)*24*60*60))
+            if end_day >= 150:
+                end_day = 150
+            start_sim_dt = end_sim_dt - datetime.timedelta(0, ((end_day/10)*24*60*60)) # So I only use the last 15 days for learning
             start_sim = start_sim_dt.strftime('%m/%d/%y %H:%M:%S')
             #start_sim = File_Begin_Time.strftime('%m/%d/%y %H:%M:%S')
             #end_sim = File_Begin_Time + datetime.timedelta(0, ((end_day/10)*24*60*60)) # I am not using this

@@ -23,7 +23,7 @@ end_sim = str(end_sim_1) + ' ' + str(end_sim_2)
 #print start_sim
 #print end_sim
 #print Text
-#print Input_Data
+print(Input_Data)
 #time.sleep(2)
 
 Light_Real_min = 0; Light_Real_max= 2000; Light_max = 10; Light_min = 0

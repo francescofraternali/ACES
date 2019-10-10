@@ -1,0 +1,8 @@
+Results ACES_FF62_PIR_10: Epis: 0, Rew: -20292, Max_R: 0, Avg_R: -20292.0, Ep: 0.35007
+Results ACES_FF62_PIR_10: Epis: 0, Rew: -12642, Max_R: 0, Avg_R: -12642.0, Ep: 0.35007
+Results ACES_FF62_PIR_10: Epis: 0, Rew: -19300, Max_R: 0, Avg_R: -19300.0, Ep: 0.35007
+Results ACES_FF62_PIR_10: Epis: 5000, Rew: -15468, Max_R: 0, Avg_R: -15411.725490196079, Ep: 0.7000700000000725
+Results ACES_FF62_PIR_10: Epis: 9285, Rew: -9500, Max_R: 160, Avg_R: -13556.0, Ep: 1
+Results ACES_FF62_PIR_10: Epis: 0, Rew: -15454, Max_R: 0, Avg_R: -15454.0, Ep: 0.35007
+Results ACES_FF62_PIR_10: Epis: 0, Rew: -20500, Max_R: 0, Avg_R: -20500.0, Ep: 0.35069999999999996
+Results ACES_FF62_PIR_10: Epis: 929, Rew: -9500, Max_R: 0, Avg_R: -13649.8, Ep: 1
