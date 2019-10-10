@@ -35,7 +35,7 @@ class Env_Rew_Pol_Real:
         for i in range(0, 60, 15):
             self.T_m_List.append(i)
 
-    def Init(self, diction_feat, granul, Input_Data):
+    def Init(self, diction_feat, Input_Data):
         # initial observation
         '''
         with open(Input_Data) as f:
@@ -157,7 +157,7 @@ class Env_Rew_Pol_Real:
 
         return s, s_, old, self.perf, self.reward
 
-    def Envi(self, action, tot_action, diction_feat, granul, s_, old, Input_Data, Sleep):
+    def Envi(self, action, tot_action, diction_feat, s_, old, Input_Data, Sleep):
         # Reward Based on Action and Environment
         #print(Input_Data)
 
@@ -193,7 +193,7 @@ class Env_Rew_Pol_Real:
                     self.curr_time_m_next = min(self.T_m_List, key=lambda x:abs(x-self.curr_time_m_next))
                     self.curr_time_next = datetime.datetime(self.curr_time_next.year, self.curr_time_next.month, self.curr_time_next.day, self.curr_time_next.hour, self.curr_time_next.minute)
 
-                    self.reward, self.perf_next, self.Node_Death = simple_barath_sending_and_dying_rew(action, tot_action, self.SC_norm_next, self.perf, SC_norm_min, granul)
+                    self.reward, self.perf_next, self.Node_Death = rew_func(action, tot_action, self.SC_norm_next, self.perf, SC_norm_min)
                     Skip = False
                     return self.reward, self.done, s_, Skip, old, self.Node_Death, int(self.perf_Pure)
 
@@ -247,13 +247,13 @@ class Env_Rew_Pol_Real:
         self.perf_Pure = Splitted[4]
         self.perf = int(self.perf_Pure);
 
-        self.reward, self.perf_next, self.Node_Death = simple_barath_sending_and_dying_rew(action, tot_action, self.SC_norm_next, self.perf, SC_norm_min, granul)
+        self.reward, self.perf_next, self.Node_Death = rew_func(action, tot_action, self.SC_norm_next, self.perf, SC_norm_min)
         #reward, perf_next = rp.simple_light_rew(action, Light, perf)
 
         self.perf_Pure = int(Splitted[4])
 
         # Adjust Performance and Time
-        self.perf_next = adjust_perf(self.perf_next, granul)  #time_temp = 600
+        #self.perf_next = adjust_perf(self.perf_next, granul)  #time_temp = 600
 
         self.R += self.reward
 
@@ -269,7 +269,7 @@ class Env_Rew_Pol_Real:
         #self.done = True
         return self.reward, self.done, s_, Skip, new, self.Node_Death, int(self.perf_Pure)
 
-    def Update_s(self, action, diction_feat, s, granul):
+    def Update_s(self, action, diction_feat, s):
         # Append Data
 
         #print self.reward/100
@@ -301,44 +301,18 @@ class Env_Rew_Pol_Real:
             pickle.dump([self.Light_Best, self.Action_Best, self.reward_Best, self.best_reward, self.Time_Best, self.perf_Best, self.SC_Pure_Best, self.SC_Best_norm_hist, self.Tot_Episodes, self.Tot_Reward, Text, episode], f, protocol=2)
 
 
-def simple_barath_sending_and_dying_rew(action, tot_action, SC_norm, perf, SC_norm_min, granul): # not finished yet
-    '''
-    if tot_action == 3:
-        if action == 2:
-            perf += 1;
-        if action == 1:
-            perf += 0
-        if action == 0:
-            perf -= 1
-    else:
-        print("Error")
-        exit()
-    '''
-    #f = open("action.txt","w+")
-    #f.write(str(action))
-    #f.close()
-    #print "Action Writed: " + str(action)
+def rew_func(action, tot_action, SC_norm, perf, SC_norm_min): # not finished yet
 
-    #print "here hrehrehrehrehr"
     perf = action
-
-    if perf > len(granul)-1:
-    	perf = len(granul)-1
-    if perf < 0:
-    	perf = 0
 
     # every time you send a data in 15mins you get 1000 points
     if perf == 3:
-        #reward = 4000
         reward = 3
     elif perf == 2:
-        #reward = 3000
         reward = 2
     elif perf == 1:
-        #reward = 2000
         reward = 1
     elif perf == 0:
-        #reward = 1000
         reward = 0
 
     #print SC_norm
@@ -354,13 +328,6 @@ def simple_barath_sending_and_dying_rew(action, tot_action, SC_norm, perf, SC_no
         reward = - 100
 
     return reward, perf, Node_Death
-
-def adjust_perf(perf, granul):
-
-    if perf > len(granul) - 1:
-    	perf = len(granul) - 1
-    if perf < 0:
-    	perf = 0
 
     return perf
 

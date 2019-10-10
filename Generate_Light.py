@@ -17,6 +17,7 @@ end_sim_1 = sys.argv[3]
 end_sim_2 = sys.argv[4]
 Text = sys.argv[5]
 Input_Data = sys.argv[6]
+granularity = int(sys.argv[7])
 
 start_sim = str(start_sim_1) + ' ' +str(start_sim_2)
 end_sim = str(end_sim_1) + ' ' + str(end_sim_2)
@@ -29,6 +30,7 @@ print(Input_Data)
 Light_Real_min = 0; Light_Real_max= 2000; Light_max = 10; Light_min = 0
 
 T_m_List = []
+steps = granularity/60
 for i in range(0, 60, 15):
     T_m_List.append(i)
 
@@ -62,7 +64,7 @@ Light_Adapt_hist = []; Time_Adapt_hist = [];
 #Starting_time = datetime.datetime(18,Month,Day,curr_time_h,curr_time_m,05)
 Starting_time = datetime.datetime.strptime(start_sim, '%m/%d/%y %H:%M:%S')
 Ending_time = datetime.datetime.strptime(end_sim, '%m/%d/%y %H:%M:%S')
-Starting_next = Starting_time + datetime.timedelta(0, 15*60)
+Starting_next = Starting_time + datetime.timedelta(0, granularity)
 Starting_next = Starting_time
 Light_sum = []
 #print Starting_time
@@ -127,7 +129,7 @@ for i in range(0,len(content)):
                             block = 0
                     #print curr_time
                     if block == 0:
-                        Starting_next = Starting_next + datetime.timedelta(0, 15*60)
+                        Starting_next = Starting_next + datetime.timedelta(0, granularity)
                     #print "Next Starting", Starting_next
                     if curr_time <= Starting_next:
                         Light_sum = []
@@ -143,7 +145,7 @@ for i in range(0,len(content)):
                             Light_Adapt_hist.append(Light_old)
                             Time_Adapt_hist.append(Starting_next)
                             Light_old = int((Light_old+Light_Pure)/2)
-                            Starting_next = Starting_next + datetime.timedelta(0, 15*60)
+                            Starting_next = Starting_next + datetime.timedelta(0, granularity)
                             #print "Next Starting Empty", Starting_next
                             block = 1
 
@@ -163,7 +165,7 @@ while Starting_next < Ending_time :
         myfile.write(Append)
         Light_Adapt_hist.append(Light_old)
         Time_Adapt_hist.append(Starting_next)
-        Starting_next = Starting_next + datetime.timedelta(0, 15*60)
+        Starting_next = Starting_next + datetime.timedelta(0, granularity)
 
 
 print("Done with: " + Text + "_Adapted.txt")

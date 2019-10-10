@@ -51,16 +51,17 @@ with open('info_BS.txt') as f:
             bs_name = line[1]
 
 
-granularity = "15min" # see option above
-granul = [900, 900, 900, 900] # as Reality
+granularity = 60 # value in seconds
 
 Epsilon_max = 1
 Epsilon_min = 0.35
-tot_episodes = 20000; tot_action = 4
-steps = (tot_episodes)/10
+#tot_episodes = 20000; 
+tot_action = 4
+#steps = (tot_episodes)/10
 steps = 1
 epsi_steps = (Epsilon_max - Epsilon_min)/7
-epsi_steps = 0.0007 #0.00007
+epsi_steps = 0.007 #0.00007
+tot_episodes = int((Epsilon_max - Epsilon_min)/epsi_steps)
 save_rate = 5000
 #epsi_steps = 0.0004
 diction = {'SC_norm':'SC_n', 'Light': 'Light', 'week': 'wk'}
@@ -102,13 +103,13 @@ class Command(object):
 
 def update_Simula(Light_Input):
     print("Starting Simula...")
-    Environ = Env_Rew_Pol_Sim(granul, Light_Input)
+    Environ = Env_Rew_Pol_Sim(Light_Input)
     for episode in range(0,tot_episodes):
         #past = 0
         #count = 0
         #action_dc = - 1
         #s_ = s
-        s, s_ = Environ.Init(feat, granul, granularity, episode)
+        s, s_ = Environ.Init(feat, granularity, episode)
         while True: # this loop lasts one day
 
             # RL choose action based on observation
@@ -126,18 +127,18 @@ def update_Simula(Light_Input):
 
             action_dc = 0
 
-            reward, done, s_ = Environ.Envi(action, tot_action, feat, granul, s_, granularity, action_dc)
+            reward, done, s_ = Environ.Envi(action, tot_action, feat, s_, granularity)
 
 
             #print("before", s, action, reward, s_)
             #time.sleep(1)
             # RL learn from this transition
-            epsilon, Converge = RL.learn(str(s), action, reward, str(s_), Text, tot_action, granul, episode, steps, epsi_steps, Simula)
+            epsilon, Converge = RL.learn(str(s), action, reward, str(s_), Text, tot_action, episode, steps, epsi_steps, Simula)
 
             #print(s, action, reward, s_)
 
 
-            s = Environ.Update_s(action, feat, s, granul, episode, save_rate, action_dc)
+            s = Environ.Update_s(action, feat, s, episode, save_rate)
 
             #past += 1
             #count += 1
@@ -174,12 +175,12 @@ def update_Real():
         skip_true = 0
         skip_dead = 10
         Node_Death = False
-        Sleep = granul[0]
+        Sleep = granularity
         
-        #sync_input_data()
-        #sync_ID_file()
+        sync_input_data()
+        sync_ID_file()
 
-        s, s_, old, perf, reward = Environ.Init(feat, granul, File_name)
+        s, s_, old, perf, reward = Environ.Init(feat, File_name)
         while True: # this loop lasts one day
 
             # RL choose action based on observation
@@ -202,17 +203,17 @@ def update_Real():
             #    sync_action('3')
             #    print("Wake up, Node Full of Energy, Action Imposed to 3")
             #print("ID: " +str(BS_ID) + "_" +str(Device) + ", Last_Data: " + str(toPrint) + ", Skip: " + str(Skip) + ", Next_Act: " + str(action) + ", Wait[s]: " + str(Sleep))
-            print("ID: {0}_{1}, Last_Data: {2}, Skip: {3}, Next_Act: {4}, Wait[s]: {5}".format(str(BS_ID), str(Device), str(toPrint), str(Skip), str(action), str(Sleep)))
-            time.sleep(900) # sleep while waiting for next data
-            #sync_input_data()
+            print("ID: {0}_{1}, Last_Data: {2}, Skip: {3}, Next_Act: {4}, Wait[s]: {5}".format(str(BS_ID), str(Device), str(toPrint), str(Skip), str(action), str(granularity)))
+            time.sleep(granularity) # sleep while waiting for next data
+            sync_input_data()
 
-            reward, done, s_, Skip, new, Node_Death, perf = Environ.Envi(action, tot_action, feat, granul, s, old, File_name, Sleep)
+            reward, done, s_, Skip, new, Node_Death, perf = Environ.Envi(action, tot_action, feat, s, old, File_name, Sleep)
 
             #RL learn from this transition
             if Skip == False or Node_Death == True:
                 #print("Learn this on " + str(BS_ID) + ': ' + str(s)+ ', ' + str(action) + ', ' + str(reward) + ', ' + str(s_))
-                RL.learn(str(s), action, reward, str(s_), Text, tot_action, granul, episode, steps, epsi_steps, Simula)
-                s = Environ.Update_s(action, feat, s, granul)
+                RL.learn(str(s), action, reward, str(s_), Text, tot_action, episode, steps, epsi_steps, Simula)
+                s = Environ.Update_s(action, feat, s)
                 Environ.Saving(Text, episode, tot_episodes)
                 RL.save(episode, Text)
 
@@ -261,7 +262,7 @@ def send_email(message):
             Problem on {BS_ID} for device {Device}. Message: {message}"""
 
             server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-            server.login("name.uniquesurname@gmail.com", "Wlastik7")
+            server.login("name.uniquesurname@gmail.com", "solitapic")
             server.sendmail(
               "name.uniquesurname@gmail.com",
               "name.uniquesurname@gmail.com",
@@ -310,13 +311,13 @@ def sync_input_data():
 
     #proc = subprocess.Popen("sshpass -p " + pwd +" scp -r -o StrictHostKeyChecking=no "+bs_name+":/home/pi/BLE_GIT/Data/"+File_name+" .", stdout=subprocess.PIPE, shell=True)
     #command = "sshpass -p " + pwd +" scp -r -o StrictHostKeyChecking=no "+bs_name+":/home/pi/BLE_GIT/Data/" + File_name + " Temp_"+ File_name
-    command = "sshpass -p {0} scp -r -o StrictHostKeyChecking=no {1}:/home/pi/BLE_GIT/Data/{2} " + SaveDataFold + "Temp_{2}".format(pwd, bs_name, File_name)
+    command = "sshpass -p {0} scp -r -o StrictHostKeyChecking=no {1}:/home/pi/BLE_GIT/Data/{2} Temp_{2}".format(pwd, bs_name, File_name)
     #command = "sshpass -p " + val + " scp -r -o StrictHostKeyChecking=no " + key +":/home/pi/BLE_GIT/Data/"+ file + " Files/Temp_" + file
     out, check = checker(command, 60)
 
     if check == 0: #Everything went right
         with open(File_name, 'ab') as outfile:
-            with open(SaveDataFold + "Temp_" + File_name, 'rb') as infile:
+            with open("Temp_" + File_name, 'rb') as infile:
                 outfile.write(infile.read())
 
         #print("Removing file ...")
@@ -326,7 +327,7 @@ def sync_input_data():
         command = "sshpass -p {0} ssh {1} rm /home/pi/BLE_GIT/Data/{2}".format(pwd, bs_name, File_name)
         out, check = checker(command, 60)
         #command = "rm Temp_" + File_name
-        command = "rm "+ SaveDataFold + "Temp_{0}".format(File_name)
+        command = "rm Temp_{0}".format(File_name)
         out, check = checker(command, 60)
         #print(check)
     elif check == 1:
@@ -437,9 +438,9 @@ if __name__ == "__main__":
 
     time.sleep(1)
 
-    #print("Synching Data...")
-    #sync_ID_file()
-    #sync_input_data()
+    print("Synching Data...")
+    sync_ID_file()
+    sync_input_data()
 
     #print("Testing Email...")
     #message = "Email Test"
@@ -502,7 +503,7 @@ if __name__ == "__main__":
             #start_sim = File_Begin_Time.strftime('%m/%d/%y %H:%M:%S')
             #end_sim = File_Begin_Time + datetime.timedelta(0, ((end_day/10)*24*60*60)) # I am not using this
             print("Generating Light Data from " + str(start_sim) + " to " + str(end_sim))
-            os.system('python3 Generate_Light.py ' + str(start_sim) + ' ' + str(end_sim) + ' ' + str(Text) + ' ' + str(File_name))
+            os.system('python3 Generate_Light.py ' + str(start_sim) + ' ' + str(end_sim) + ' ' + str(Text) + ' ' + str(File_name) + ' ' + str(granularity))
             Light_Input = Text + "_Adapted.txt"
             update_Simula(Light_Input)
         else:

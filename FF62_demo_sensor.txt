@@ -1,1 +1,37 @@
 08/19/19 10:01:14|FF62_demo_sensor.txt|||2|85|0|0|142|perf-batt-PIR-reed-light||00 02 55 8e 00 00
+09/27/19 17:58:24|FF62_demo_sensor.txt|||0|87|0|0|159|perf-batt-PIR-reed-light||00 00 57 9f 00 00 
+09/27/19 18:09:05|FF62_demo_sensor.txt|||||
+09/27/19 18:15:12|FF62_demo_sensor.txt|||3|87|0|0|108|perf-batt-PIR-reed-light||00 03 57 6c 00 00 
+09/27/19 18:33:10|FF62_demo_sensor.txt|||0|87|0|0|202|perf-batt-PIR-reed-light||00 00 57 ca 00 00 
+09/27/19 18:34:23|FF62_demo_sensor.txt|||3|87|1|0|85|perf-batt-PIR-reed-light||00 03 57 55 00 01 
+09/27/19 18:34:26|FF62_demo_sensor.txt|||3|87|1|0|85|perf-batt-PIR-reed-light||00 03 57 55 00 01 
+09/27/19 18:35:07|FF62_demo_sensor.txt|||0|87|0|0|86|perf-batt-PIR-reed-light||00 00 57 56 00 00 
+09/27/19 18:38:04|FF62_demo_sensor.txt|||||
+09/27/19 18:47:54|FF62_demo_sensor.txt|||0|87|0|0|84|perf-batt-PIR-reed-light||00 00 57 54 00 00 
+09/27/19 18:48:12|FF62_demo_sensor.txt|||0|87|1|0|85|perf-batt-PIR-reed-light||00 00 57 55 00 01 
+10/10/19 11:01:22|FF62_demo_sensor.txt|||0|87|0|0|83|perf-batt-PIR-reed-light||00 00 57 53 00 00 
+10/10/19 11:04:00|FF62_demo_sensor.txt|||||
+10/10/19 11:04:39|FF62_demo_sensor.txt|||0|87|0|0|89|perf-batt-PIR-reed-light||00 00 57 59 00 00 
+10/10/19 11:33:44|FF62_demo_sensor.txt|||0|87|0|0|101|perf-batt-PIR-reed-light||00 00 57 65 00 00 
+10/10/19 12:26:20|FF62_demo_sensor.txt|||0|87|0|0|76|perf-batt-PIR-reed-light||00 00 57 4c 00 00 
+10/10/19 12:27:12|FF62_demo_sensor.txt|||0|87|0|0|69|perf-batt-PIR-reed-light||00 00 57 45 00 00 
+10/10/19 12:27:12|FF62_demo_sensor.txt|||0|87|0|0|69|perf-batt-PIR-reed-light||00 00 57 45 00 00 
+10/10/19 12:28:17|FF62_demo_sensor.txt|||3|87|0|0|69|perf-batt-PIR-reed-light||00 03 57 45 00 00 
+10/10/19 12:28:32|FF62_demo_sensor.txt|||0|87|1|0|68|perf-batt-PIR-reed-light||00 00 57 44 00 01 
+10/10/19 12:47:14|FF62_demo_sensor.txt|||3|87|1|0|61|perf-batt-PIR-reed-light||00 03 57 3d 00 01 
+10/10/19 12:47:56|FF62_demo_sensor.txt|||3|87|0|0|60|perf-batt-PIR-reed-light||00 03 57 3c 00 00 
+10/10/19 12:48:28|FF62_demo_sensor.txt|||3|87|1|0|59|perf-batt-PIR-reed-light||00 03 57 3b 00 01 
+10/10/19 12:49:09|FF62_demo_sensor.txt|||3|87|0|0|59|perf-batt-PIR-reed-light||00 03 57 3b 00 00 
+10/10/19 12:49:26|FF62_demo_sensor.txt|||3|87|1|0|61|perf-batt-PIR-reed-light||00 03 57 3d 00 01 
+10/10/19 12:50:11|FF62_demo_sensor.txt|||0|0|0|0|0|perf-batt-PIR-reed-light||00 00 00 00 00 00 
+10/10/19 12:50:35|FF62_demo_sensor.txt|||3|87|1|0|61|perf-batt-PIR-reed-light||00 03 57 3d 00 01 
+10/10/19 12:51:31|FF62_demo_sensor.txt|||3|87|0|0|61|perf-batt-PIR-reed-light||00 03 57 3d 00 00 
+10/10/19 12:52:02|FF62_demo_sensor.txt|||3|87|1|0|61|perf-batt-PIR-reed-light||00 03 57 3d 00 01 
+10/10/19 12:53:12|FF62_demo_sensor.txt|||||
+10/10/19 13:08:24|FF62_demo_sensor.txt|||3|87|0|0|59|perf-batt-PIR-reed-light||00 03 57 3b 00 00 
+10/10/19 13:08:56|FF62_demo_sensor.txt|||0|0|0|0|0|perf-batt-PIR-reed-light||00 00 00 00 00 00 
+10/10/19 13:09:10|FF62_demo_sensor.txt|||3|87|1|0|59|perf-batt-PIR-reed-light||00 03 57 3b 00 01 
+10/10/19 13:09:51|FF62_demo_sensor.txt|||3|87|0|0|56|perf-batt-PIR-reed-light||00 03 57 38 00 00 
+10/10/19 13:10:10|FF62_demo_sensor.txt|||3|87|1|0|57|perf-batt-PIR-reed-light||00 03 57 39 00 01 
+10/10/19 15:43:47|FF62_demo_sensor.txt|||3|86|0|0|45|perf-batt-PIR-reed-light||00 03 56 2d 00 00 
+10/10/19 15:47:28|FF62_demo_sensor.txt|||2|86|0|0|204|perf-batt-PIR-reed-light||00 02 56 33 00 00 
