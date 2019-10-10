@@ -6,3 +6,6 @@ Results ACES_FF62_PIR_10: Epis: 9285, Rew: -9500, Max_R: 160, Avg_R: -13556.0, E
 Results ACES_FF62_PIR_10: Epis: 0, Rew: -15454, Max_R: 0, Avg_R: -15454.0, Ep: 0.35007
 Results ACES_FF62_PIR_10: Epis: 0, Rew: -20500, Max_R: 0, Avg_R: -20500.0, Ep: 0.35069999999999996
 Results ACES_FF62_PIR_10: Epis: 929, Rew: -9500, Max_R: 0, Avg_R: -13649.8, Ep: 1
+Results ACES_FF62_PIR_10: Epis: 0, Rew: -20500, Max_R: 0, Avg_R: -20500.0, Ep: 0.35069999999999996
+Results ACES_FF62_PIR_10: Epis: 0, Rew: -20500, Max_R: 0, Avg_R: -20500.0, Ep: 0.35069999999999996
+Results ACES_FF62_PIR_10: Epis: 929, Rew: -9500, Max_R: 0, Avg_R: -13903.4, Ep: 1

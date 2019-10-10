@@ -1,0 +1,2 @@
+pwd='wlastik7'
+bs_name=pi@172.20.10.6

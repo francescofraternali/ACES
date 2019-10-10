@@ -18,7 +18,8 @@ import string
 import shutil
 import smtplib
 
-ID_BLE_path = "BLE/ID_RL.txt"
+SaveDataFold = "Saved_Data/"
+#ID_BLE_path = ""
 
 with open("ID_RL.txt", 'r') as f:
     content = f.read()
@@ -40,15 +41,15 @@ with open("ID_BLE.txt", 'r') as f:
         if splt[0] == Device:
             File_name = splt[1]
 
-'''
-with open('../info_BS.txt') as f:
+
+with open('info_BS.txt') as f:
     for line in f:
         line = line.strip().split('=')
         if line[0] == "pwd":
             pwd = line[1]
         elif line[0] == "bs_name":
             bs_name = line[1]
-'''
+
 
 granularity = "15min" # see option above
 granul = [900, 900, 900, 900] # as Reality
@@ -309,13 +310,13 @@ def sync_input_data():
 
     #proc = subprocess.Popen("sshpass -p " + pwd +" scp -r -o StrictHostKeyChecking=no "+bs_name+":/home/pi/BLE_GIT/Data/"+File_name+" .", stdout=subprocess.PIPE, shell=True)
     #command = "sshpass -p " + pwd +" scp -r -o StrictHostKeyChecking=no "+bs_name+":/home/pi/BLE_GIT/Data/" + File_name + " Temp_"+ File_name
-    command = "sshpass -p {0} scp -r -o StrictHostKeyChecking=no {1}:/home/pi/BLE_GIT/Data/{2} Temp_{2}".format(pwd, bs_name, File_name)
+    command = "sshpass -p {0} scp -r -o StrictHostKeyChecking=no {1}:/home/pi/BLE_GIT/Data/{2} " + SaveDataFold + "Temp_{2}".format(pwd, bs_name, File_name)
     #command = "sshpass -p " + val + " scp -r -o StrictHostKeyChecking=no " + key +":/home/pi/BLE_GIT/Data/"+ file + " Files/Temp_" + file
     out, check = checker(command, 60)
 
     if check == 0: #Everything went right
         with open(File_name, 'ab') as outfile:
-            with open("Temp_" + File_name, 'rb') as infile:
+            with open(SaveDataFold + "Temp_" + File_name, 'rb') as infile:
                 outfile.write(infile.read())
 
         #print("Removing file ...")
@@ -325,7 +326,7 @@ def sync_input_data():
         command = "sshpass -p {0} ssh {1} rm /home/pi/BLE_GIT/Data/{2}".format(pwd, bs_name, File_name)
         out, check = checker(command, 60)
         #command = "rm Temp_" + File_name
-        command = "rm Temp_{0}".format(File_name)
+        command = "rm "+ SaveDataFold + "Temp_{0}".format(File_name)
         out, check = checker(command, 60)
         #print(check)
     elif check == 1:
@@ -334,14 +335,14 @@ def sync_input_data():
 
 def sync_ID_file():
 
-    call("sshpass -p " + pwd +" scp -r -o StrictHostKeyChecking=no ../BLE/ID.txt "+bs_name+":/home/pi/BLE_GIT/ID/", shell=True)
+    call("sshpass -p " + pwd +" scp -r -o StrictHostKeyChecking=no ID_BLE.txt "+bs_name+":/home/pi/BLE_GIT/ID/ID.txt", shell=True)
 
 def sync_action(action):
     run = 0
     for num_attemps in range(3):
         try:
             # Now Let's update the action
-            with open(ID_BLE_path, 'r') as f:
+            with open("ID_BLE.txt", 'r') as f:
                 lines = f.read().splitlines()
                 count = 0
                 for line in lines:
@@ -365,10 +366,11 @@ def sync_action(action):
                 g.write('\n'.join(lines))
 
 
-            os.remove('../BLE/ID.txt')
-
-            shutil.move('output_file.txt','../BLE/')
-            os.rename('../BLE/output_file.txt','../BLE/ID.txt')
+            os.remove('ID_BLE.txt')
+            #sleep(0.5)
+            #shutil.move('output_file.txt','../BLE/')
+            sleep(0.5)
+            os.rename('output_file.txt','ID_BLE.txt')
 
             run = 1
         except:
@@ -381,7 +383,7 @@ def sync_action(action):
         send_email("Something wrong while synching actions. Check!")
 
     #print("sshpass -p "+pwd+" scp -r -o StrictHostKeyChecking=no ../BLE/ID.txt "+bs_name+":/home/pi/BLE_GIT/BaseStation")
-    call("sshpass -p "+pwd+" scp -r -o StrictHostKeyChecking=no ../BLE/ID.txt "+bs_name+":/home/pi/BLE_GIT/ID", shell=True)
+    call("sshpass -p "+pwd+" scp -r -o StrictHostKeyChecking=no ID_BLE.txt "+bs_name+":/home/pi/BLE_GIT/ID/ID.txt", shell=True)
 
 def find_Q_Table(day):
     proc = Popen("ls Q_Tables", stdout=PIPE, shell=True)
