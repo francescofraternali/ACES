@@ -369,7 +369,7 @@ def sync_action(action):
             os.remove('ID_BLE.txt')
             #sleep(0.5)
             #shutil.move('output_file.txt','../BLE/')
-            sleep(0.5)
+            time.sleep(0.5)
             os.rename('output_file.txt','ID_BLE.txt')
 
             run = 1
