@@ -86,7 +86,8 @@ class QLearningTable:
                 #print("Convergence Achieved")
             else:
                 self.Q_Table_mean_old = check
-
+        
+        print(self.q_table)
         if self.epsilon >= 1:
             self.epsilon = 1
 
