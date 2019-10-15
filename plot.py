@@ -98,12 +98,12 @@ def close_event():
 
 path = "FF62_demo_sensor.txt"
 fig, ax = plt.subplots(1)
-fig.set_size_inches(11, 10)
+fig.set_size_inches(7, 6)
 file_1 = "Black Pible Node - Reinforcement Learning Demonstrator"
 file = ""
 
 plt.ion()
-for step in range(0,100):
+for step in range(0,10000):
     Time_hist_1, Volt_hist_1, Perf_hist_1, PIR_hist_1, Light_hist_1 = extract(path)
     Time_hist_2 = []; Volt_hist_2 = []; Perf_hist_2 = []; PIR_hist_2 = []; Light_hist_2 = [];
 
