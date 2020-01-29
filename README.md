@@ -6,7 +6,7 @@ ACES uses Reinforcement Learning (RL) with Q Learning to maximize sensing(i.e. t
 Wireless Sensor Network Architecture:
 We target single-hop networks where a Master (Computation Unit) interacts directly with a sensor node to drive its sensing and collect data.  In the Figure below, our wireless sensor network architecture: 
 
-![alt text](https://github.com/francescofraternali/ACES/img/Figure_1.PNG)
+![alt text](https://github.com/francescofraternali/ACES/img/Figure_1.png)
 
 ACES can run in any computational unit that can converge in one day a base station (i.e. Raspberry PI), local server, cloud. 
 
