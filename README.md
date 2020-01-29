@@ -1,9 +1,9 @@
 # ACES: Automatic Configuration of Energy Harvesting Sensors with Reinforcement Learning
 
-Objective:
+**Objective:**
 ACES uses Reinforcement Learning (RL) with Q Learning to maximize sensing(i.e. temperature monitoring, PIR detection events) while avoiding energy storage depletion. It can be used with any energy harvesting platform that can store some energy for later usage (i.e. super-capacitor, capacitor, battery).
 
-Wireless Sensor Network Architecture:
+**Wireless Sensor Network Architecture:**
 We target single-hop networks where a Master (Computation Unit) interacts directly with a sensor node to drive its sensing and collect data.  In the Figure below, our wireless sensor network architecture: 
 
 ![WSN](img/Figure_1.PNG)
