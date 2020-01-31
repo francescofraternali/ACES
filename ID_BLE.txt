@@ -1,3 +1,0 @@
-FF62,FF62_demo_sensor.txt,3
-FF20,FF20_demo_sensor_2.txt,2
-FF26,FF26_demo_sensor_3.txt,2

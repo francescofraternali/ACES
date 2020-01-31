@@ -1,2 +1,0 @@
-pwd='ucciucci'
-bs_name=pi@192.168.137.73
