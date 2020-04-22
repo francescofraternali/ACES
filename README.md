@@ -13,7 +13,7 @@ ACES can run in any computational unit that can converge in one day. Therefore, 
 In this example, we use ACES with Pible, our custom battery-free mote for perpetual indoor BLE applications. Pible uses a solar panel to gather energy from the environment and a supercapacitor to store it. It can be used for general indoor building applications as it embeds a variety of sensors: temperature, humidity, PIR, reed switch, pressure, accelerometer, gyroscope, microphone, and light.
 
 **How to:**
-Run Main_Real.py to start ACES. The system will initially look for an existing Q-Table inside the folder Q_tables. If not found, it will calculate a new Q_Table from scratch. 
+Run Main_Sim.py to start ACES. The system will initially look for an existing Q-Table inside the folder Q_tables. If not found, it will calculate a new Q_Table from scratch. 
 
 To learn a new Q-Table the system needs the last day of lighting levels in lux. If those are not present, the system will automatically use all "0" lighting levels.
 
