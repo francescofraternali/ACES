@@ -8,9 +8,7 @@ We target single-hop networks where a Master (Computational Unit) interacts dire
 
 ![WSN](img/Figure_1.PNG)
 
-ACES can run in any computational unit that can converge in one day. Therefore, ACES is preferrable to be run in a base station (i.e. Raspberry PI), local server, or cloud. 
-
-In this example, we use ACES with Pible, our custom battery-free mote for perpetual indoor BLE applications. Pible uses a solar panel to gather energy from the environment and a supercapacitor to store it. It can be used for general indoor building applications as it embeds a variety of sensors: light, temperature, humidity, PIR, reed switch, pressure, accelerometer, gyroscope, and microphone.
+In this example, we use ACES with Pible, our custom battery-free mote for perpetual indoor BLE applications. Pible uses a solar panel to gather energy from the environment and a supercapacitor to store it. It can be used for general indoor building applications as it embeds a variety of sensors: light, temperature, humidity, PIR, reed switch, pressure, accelerometer, gyroscope, and microphone. We run ACES in our local server, but it can run in a base station (i.e. Raspberry PI) or in the cloud. 
 
 **How to:**
 Run Main_Sim.py to start ACES. The system will initially look for an existing Q-Table inside the folder Q_tables. If not found, it will calculate a new Q_Table from scratch. 
