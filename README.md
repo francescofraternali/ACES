@@ -14,6 +14,8 @@ We run ACES in our local server, but it can run in a base station (i.e. Raspberr
 
 ACES uses a "day-by-day" learning approach: it uses the last day of data collected to train a Q-Table, then it tests in the coming day using the generated policy. Once the test day is over and new data are collected, the old Q-Table is resumed and a new training is started using all the data collected. In this way, the agent updates the policy over time and adapts it throughout days and weeks without any human intervention.
 
+ACES controls the sleep time of the sensor-node: action 0, 1, 2 and corresponds to a sleeping time of 15 minutes, 5 minutes, 1 minute, and 15 seconds respectively.
+
 
 **How to:**
 Run Main_Sim.py to start ACES. The system will initially look for an existing Q-Table inside the folder Q_tables. If not found, it will calculate a new Q_Table from scratch. 
