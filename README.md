@@ -8,7 +8,12 @@ We target single-hop networks where a Master (Computational Unit) interacts dire
 
 ![WSN](img/Figure_1.PNG)
 
-In this example, we use ACES with Pible, our custom battery-free mote for perpetual indoor BLE applications. Pible uses a solar panel to gather energy from the environment and a supercapacitor to store it. It can be used for general indoor building applications as it embeds a variety of sensors: light, temperature, humidity, PIR, reed switch, pressure, accelerometer, gyroscope, and microphone. We run ACES in our local server, but it can run in a base station (i.e. Raspberry PI) or in the cloud. 
+In this example, we use ACES with Pible, our custom battery-free mote for perpetual indoor BLE applications. Pible uses a solar panel to gather energy from the environment and a supercapacitor to store it. It can be used for general indoor building applications as it embeds a variety of sensors: light, temperature, humidity, PIR, reed switch, pressure, accelerometer, gyroscope, and microphone. Pible has a 1F supercapacitor with 5.5V nominal voltage. We consider Pible to stop operations while achieving a voltage level <= 3V as its sensors cannot work correctly under such condition.
+
+We run ACES in our local server, but it can run in a base station (i.e. Raspberry PI) or the cloud. 
+
+ACES uses a "day-by-day" learning approach: it uses the last day of data collected to train a Q-Table, then it tests in the coming day using the generated policy. Once the test day is over and new data are collected, the old Q-Table is resumed and a new training is started using all the data collected. In this way, the agent updates the policy over time and adapts it throughout days and weeks without any human intervention.
+
 
 **How to:**
 Run Main_Sim.py to start ACES. The system will initially look for an existing Q-Table inside the folder Q_tables. If not found, it will calculate a new Q_Table from scratch. 
