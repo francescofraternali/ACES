@@ -48,3 +48,6 @@ Results ACES_FF62_85: Epis: 0, Rew: 174, Max_R: 0, Avg_R: 174.0, Ep: 1
 Results ACES_FF62_15: Epis: 0, Rew: 198, Max_R: 0, Avg_R: 198.0, Ep: 1
 Results ACES_FF62_15: Epis: 0, Rew: 199, Max_R: 0, Avg_R: 199.0, Ep: 1
 Results ACES_FF62_25: Epis: 0, Rew: 165, Max_R: 0, Avg_R: 165.0, Ep: 1
+Results ACES_FF62_15: Epis: 0, Rew: 184, Max_R: 0, Avg_R: 184.0, Ep: 1
+Results ACES_FF62_15: Epis: 0, Rew: 189, Max_R: 0, Avg_R: 189.0, Ep: 1
+Results ACES_FF62_25: Epis: 0, Rew: 196, Max_R: 0, Avg_R: 196.0, Ep: 1

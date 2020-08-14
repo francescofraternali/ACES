@@ -60,7 +60,7 @@ def update(start_day, end_day):
             if done:
                 break
 
-        if (episode % 50 == 0 and learn_single_day == False):
+        if (episode % 10 == 0 and learn_single_day == False):
             Environ.printing(Text, episode, tot_episodes, epsilon, 0)
 
         if learn_single_day:
@@ -102,7 +102,9 @@ if __name__ == "__main__":
     check_start_day = 10
     Text = ''.join(str(elem) for elem in Text_list)
 
-    day = 10
+    day = 10 # day = 10 means day 1.
+    # Multiples of day 10 (i.e. 20, 30 etc) are training days while days
+    # ending in 5 (i.e. 15) means testing day after training day (i.e. day 15 is testing day after training on day 1).
 
     Q_found, day = find_Q_Table(day)
     spl = Q_found.split('_')

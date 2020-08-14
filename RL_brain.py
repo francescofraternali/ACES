@@ -82,27 +82,5 @@ class QLearningTable:
         self.Q_table_mean.append(np.mean(self.q_table))
         self.steps_count.append(episode)
 
-        '''
-        fig, ax = plt.subplots(1)
-        plt.plot(self.steps_count, self.Q_table_mean, 'r', label = 'Q function')
-        ax.tick_params(axis='both', which='major', labelsize=10)
-        plt.title('Q function mean' + str(Text), fontsize=15)
-        plt.ylabel('Q predict', fontsize=15)
-        plt.xlabel('steps', fontsize=20)
-        ax.grid(True)
-        fig.savefig('Saved_Data/Convergence_' + str(Text) + '.png', bbox_inches='tight')
-        #plt.show()
-        plt.close(fig)
-        #with open('Saved_Data/' + Text + '.pkl', 'w') as f:  # Python 3: open(..., 'wb')
-        #    pickle.dump([self.steps_count, self.Q_table_tot, Text], f)
-
-        afile = open('Saved_Data/Convergence_' + Text + '.pkl', 'wb')
-        pickle.dump([self.steps_count, self.Q_table_mean], afile)
-        '''
         afile = open('Q_Tables/Q_Table_' + Text + '.pkl', 'wb')
         pickle.dump(self.q_table, afile)
-        '''
-        with open("Table_Dim.txt", 'a') as myfile:
-            myfile.write("Dimension of " + str(Text) + ": " + str(self.q_table.shape) + "\n")
-        myfile.close()
-        '''

@@ -8,8 +8,8 @@ import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 import pickle
 import random
-#from Light_Env import calc_light_occup_real
 
+# Pible sensor nodes main parameters! IMP: do not modify!!!!
 I_sleep = 0.0000032; I_BLE_Sens_1 = 0.000210; Time_BLE_Sens_1 = 6.5
 V_Solar_200lux = 1.5; I_Solar_200lux = 0.000031;  # It was 1.5
 #V_Solar_200lux = 0.75; I_Solar_200lux = 0.0000155;  # It was 1.5
@@ -198,25 +198,6 @@ class Env_Rew_Pol_Sim:
         self.Tot_Reward.append(self.R); self.Tot_Episodes.append(episode); self.Avg_Reward.append(sum(self.Tot_Reward)/len(self.Tot_Reward))
         print(Text + ", Epis: " + str(episode) + "/" + str(tot_episodes) + ", Rew: " + str(self.R) + ", Max_R: " + str(self.best_reward) + ", Avg_R: " + str(sum(self.Tot_Reward)/len(self.Tot_Reward)) + ", Ep: " + str(epsilon))
 
-        '''
-        if self.R > self.best_reward:
-            self.Light_Best = self.Light_hist; self.Action_Best = self.Action_hist; self.reward_Best = self.reward_hist; self.best_reward = self.R; self.Time_Best = self.Time_hist; self.perf_Best = self.perf_hist; self.SC_Real_Best = self.SC_Real_hist
-            self.SC_Best_norm_hist = self.SC_norm_hist;
-
-            plot_best(self.Time_Best, self.Light_Best, self.Action_Best, self.reward_Best, self.perf_Best, self.SC_Real_Best, self.SC_Best_norm_hist, Text, self.best_reward, episode)
-            plot_reward_text(self.Tot_Episodes, self.Tot_Reward, Text, self.best_reward, episode, self.Avg_Reward)
-            with open('Saved_Data/Graph_Best_' + Text + '.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
-                pickle.dump([self.Light_Best, self.Action_Best, self.reward_Best, self.best_reward, self.Time_Best, self.perf_Best, self.SC_Real_Best, self.SC_Best_norm_hist, self.Tot_Episodes, self.Tot_Reward, Text, episode], f)
-
-        if episode % save_rev_rate == 0:
-            plot_reward_text(self.Tot_Episodes, self.Tot_Reward, Text, self.best_reward, episode, self.Avg_Reward)
-            with open('Saved_Data/Graph_hist_' + Text + '.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
-                pickle.dump([self.Light_hist, self.Action_hist, self.reward_hist, self.best_reward, self.Time_hist, self.perf_hist, self.SC_Real_hist, self.SC_norm_hist, self.Tot_Episodes, self.Tot_Reward, Text, episode, self.Action_hist_dc, self.reward_hist_dc, self.SC_Real_hist_dc, self.R_dc, self.R, self.data_out, self.data_out_dc], f)
-            plot_hist(self.Time_hist, self.Light_hist, self.Action_hist, self.reward_hist, self.perf_hist, self.SC_Real_hist, self.SC_norm_hist, Text, self.best_reward, episode, self.Action_hist_dc, self.reward_hist_dc, self.SC_Real_hist_dc, self.R_dc, self.R, self.data_out, self.data_out_dc)
-            with open('Saved_Data/Avg_Reward_' + Text + '.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
-                pickle.dump([self.Tot_Reward, self.Tot_Episodes, self.Avg_Reward], f)
-        '''
-
         if write_to_file:
             with open('Final_Results.txt', 'a') as myfile:
                 myfile.write("Results " + str(Text) + ": Epis: " + str(episode) + ", Rew: " + str(self.R) + ", Max_R: " + str(self.best_reward) + ", Avg_R: " + str(sum(self.Tot_Reward)/len(self.Tot_Reward)) + ", Ep: " + str(epsilon) + "\n")
@@ -271,7 +252,6 @@ def calc_energy_prod_consu(time_temp, SC_Real, Light, perf):
     return SC_Real, SC_norm
 
 def plot_graph(Time, Light, Action, reward, perf, SC_Real, SC_norm, Text, best_reward, tot_episodes, R):
-    #print(Time)
     #Start Plotting
     plt.figure(1)
     ax1 = plt.subplot(411)
